@@ -336,7 +336,7 @@
         </div>
         
         <div class="info">
-            > Для сдачи кода пишите: @GoodGameIsGood 
+            Для сдачи кода пишите: <@GoodGameIsGood 
         </div>
         
         <div class="info" style="text-align: center; margin-top: 20px; text-transform: uppercase;">
@@ -356,7 +356,6 @@
                 }
             }, 5000);
             
-            // Упрощенная анимация печати для мобильных
             if (window.innerWidth > 768) {
                 const infoElements = document.querySelectorAll('.info');
                 infoElements.forEach(el => {
@@ -374,7 +373,6 @@
                 });
             }
             
-            // Облегченная версия анимации бликов для мобильных
             if (window.innerWidth > 480) {
                 setInterval(() => {
                     if (Math.random() > 0.8) {
