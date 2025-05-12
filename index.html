@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Сириус Квест - 2025</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -25,9 +26,9 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            padding: 10px;
         }
         
-        /* Новый металлический фон */
         body::before {
             content: "";
             position: fixed;
@@ -74,14 +75,13 @@
             border: 1px solid #0f0;
             border-radius: 0;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-            padding: 30px;
+            padding: 20px;
             text-align: left;
             max-width: 800px;
-            width: 90%;
-            margin: 20px;
+            width: 100%;
+            margin: 10px 0;
             position: relative;
             z-index: 2;
-            /* Металлический эффект для контейнера */
             background-image: linear-gradient(
                 to bottom,
                 rgba(255, 255, 255, 0.1) 0%,
@@ -89,21 +89,23 @@
                 rgba(255, 255, 255, 0) 80%,
                 rgba(255, 255, 255, 0.1) 100%
             );
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
         
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
             color: #0f0;
             text-align: center;
             text-shadow: 0 0 5px #0f0;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
         
         .year {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: rgb(103, 192, 103);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
             text-shadow: 0 0 5px #0f0;
         }
@@ -112,26 +114,26 @@
             width: 100%;
             height: 1px;
             background: linear-gradient(90deg, transparent, #0f0, transparent);
-            margin: 20px 0;
+            margin: 15px 0;
             opacity: 0.5;
         }
         
         .info {
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
             color: #0f0;
         }
         
         .code-block {
             background-color: rgba(0, 30, 0, 0.5);
             border-left: 3px solid #0f0;
-            padding: 15px;
-            margin: 20px 0;
+            padding: 12px;
+            margin: 15px 0;
             font-family: 'Share Tech Mono', monospace;
             white-space: pre-wrap;
             position: relative;
-            /* Металлический эффект для блока кода */
+            font-size: 0.85rem;
             background-image: linear-gradient(
                 to right,
                 rgba(255, 255, 255, 0.05) 0%,
@@ -139,13 +141,15 @@
                 rgba(255, 255, 255, 0) 80%,
                 rgba(255, 255, 255, 0.05) 100%
             );
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
         
         .code-block::before {
             content: '>';
             position: absolute;
             left: 5px;
-            top: 15px;
+            top: 12px;
             color: #0f0;
         }
         
@@ -160,10 +164,10 @@
         
         .cursor {
             display: inline-block;
-            width: 10px;
-            height: 20px;
+            width: 8px;
+            height: 16px;
             background-color: #0f0;
-            margin-left: 5px;
+            margin-left: 4px;
             vertical-align: middle;
             animation: blink 1s step-end infinite;
         }
@@ -182,15 +186,15 @@
         }
         
         .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #f00;
+            left: 1px;
+            text-shadow: -1px 0 #f00;
             clip: rect(44px, 450px, 56px, 0);
             animation: glitch-anim 5s infinite linear alternate-reverse;
         }
         
         .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 #00f;
+            left: -1px;
+            text-shadow: -1px 0 #00f;
             clip: rect(44px, 450px, 56px, 0);
             animation: glitch-anim2 5s infinite linear alternate-reverse;
         }
@@ -227,11 +231,10 @@
             background-color: rgba(0, 30, 0, 0.5);
             padding: 5px 10px;
             border-bottom: 1px solid rgb(143, 230, 143);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
-            /* Металлический эффект для заголовка */
+            font-size: 0.8rem;
             background-image: linear-gradient(
                 to right,
                 rgba(255, 255, 255, 0.1) 0%,
@@ -242,10 +245,10 @@
         
         .terminal-buttons span {
             display: inline-block;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            margin-left: 5px;
+            margin-left: 4px;
         }
         
         .terminal-buttons span:nth-child(1) { background-color: #f00; }
@@ -254,7 +257,7 @@
         
         .icon {
             display: inline-block;
-            margin-right: 10px;
+            margin-right: 8px;
             vertical-align: middle;
             font-weight: bold;
         }
@@ -265,17 +268,32 @@
             border-bottom: 1px dashed #0f0;
         }
         
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+        /* Горизонтальная прокрутка для длинных кодов */
+        .code-scroll {
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 5px;
+        }
+        
+        /* Оптимизация анимаций для мобильных */
+        @media (max-width: 480px) {
+            .glitch::before, .glitch::after {
+                animation: none;
+                display: none;
             }
             
-            .year {
-                font-size: 1.5rem;
+            .info {
+                font-size: 0.85rem;
             }
             
-            .container {
-                padding: 20px;
+            .code-block {
+                font-size: 0.8rem;
+                padding: 10px 12px 10px 20px;
+            }
+            
+            .code-block::before {
+                top: 10px;
             }
         }
     </style>
@@ -309,16 +327,19 @@
         </div>
         
         <div class="code-block">
-            <span class="icon">✉</span> баббаабаббббабббббббаббабабббаббабабаба
-            
-            <span class="icon">🔑</span> феъшюыфюпнфрайутффшрышуыоьрнщычуащацаоы
+            <div class="code-scroll">
+                <span class="icon">✉</span> баббаабаббббабббббббаббабабббаббабабаба
+            </div>
+            <div class="code-scroll">
+                <span class="icon">🔑</span> феъшюыфюпнфрайутффшрышуыоьрнщычуащацаоы
+            </div>
         </div>
         
         <div class="info">
             > Для сдачи кода пишите: @GoodGameIsGood 
         </div>
         
-        <div class="info" style="text-align: center; margin-top: 30px; text-transform: uppercase;">
+        <div class="info" style="text-align: center; margin-top: 20px; text-transform: uppercase;">
             Удачи, воин!
         </div>
     </div>
@@ -328,54 +349,58 @@
             const container = document.querySelector('.container');
             let glitchInterval = setInterval(() => {
                 if (Math.random() > 0.9) {
-                    container.style.boxShadow = '0 0 30px rgba(0, 255, 0, 0.8)';
+                    container.style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.8)';
                     setTimeout(() => {
-                        container.style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.3)';
+                        container.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.3)';
                     }, 100);
                 }
             }, 5000);
             
-            // Эффект печатающего текста
-            const infoElements = document.querySelectorAll('.info');
-            infoElements.forEach(el => {
-                const text = el.innerHTML;
-                el.innerHTML = '';
-                let i = 0;
-                const typing = setInterval(() => {
-                    if (i < text.length) {
-                        el.innerHTML += text.charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(typing);
-                    }
-                }, 10);
-            });
+            // Упрощенная анимация печати для мобильных
+            if (window.innerWidth > 768) {
+                const infoElements = document.querySelectorAll('.info');
+                infoElements.forEach(el => {
+                    const text = el.innerHTML;
+                    el.innerHTML = '';
+                    let i = 0;
+                    const typing = setInterval(() => {
+                        if (i < text.length) {
+                            el.innerHTML += text.charAt(i);
+                            i++;
+                        } else {
+                            clearInterval(typing);
+                        }
+                    }, 10);
+                });
+            }
             
-            // Добавляем случайные блики на металлической поверхности
-            setInterval(() => {
-                if (Math.random() > 0.7) {
-                    const shine = document.createElement('div');
-                    shine.style.position = 'fixed';
-                    shine.style.width = '100px';
-                    shine.style.height = '100px';
-                    shine.style.background = 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)';
-                    shine.style.borderRadius = '50%';
-                    shine.style.pointerEvents = 'none';
-                    shine.style.zIndex = '0';
-                    shine.style.left = Math.random() * 100 + 'vw';
-                    shine.style.top = Math.random() * 100 + 'vh';
-                    shine.style.transform = 'translate(-50%, -50%)';
-                    document.body.appendChild(shine);
-                    
-                    setTimeout(() => {
-                        shine.style.transition = 'opacity 1s ease-out';
-                        shine.style.opacity = '0';
+            // Облегченная версия анимации бликов для мобильных
+            if (window.innerWidth > 480) {
+                setInterval(() => {
+                    if (Math.random() > 0.8) {
+                        const shine = document.createElement('div');
+                        shine.style.position = 'fixed';
+                        shine.style.width = '80px';
+                        shine.style.height = '80px';
+                        shine.style.background = 'radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%)';
+                        shine.style.borderRadius = '50%';
+                        shine.style.pointerEvents = 'none';
+                        shine.style.zIndex = '0';
+                        shine.style.left = Math.random() * 100 + 'vw';
+                        shine.style.top = Math.random() * 100 + 'vh';
+                        shine.style.transform = 'translate(-50%, -50%)';
+                        document.body.appendChild(shine);
+                        
                         setTimeout(() => {
-                            shine.remove();
-                        }, 1000);
-                    }, 300);
-                }
-            }, 2000);
+                            shine.style.transition = 'opacity 0.8s ease-out';
+                            shine.style.opacity = '0';
+                            setTimeout(() => {
+                                shine.remove();
+                            }, 800);
+                        }, 200);
+                    }
+                }, 2500);
+            }
         });
     </script>
 </body>
