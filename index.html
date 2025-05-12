@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сириус Квест - 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #0f0;
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Новый металлический фон */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(200, 200, 200, 0.1) 0%, 
+                rgba(150, 150, 150, 0.3) 25%, 
+                rgba(200, 200, 200, 0.1) 50%, 
+                rgba(150, 150, 150, 0.3) 75%, 
+                rgba(200, 200, 200, 0.1) 100%);
+            background-size: 400% 400%;
+            animation: metalShine 15s ease infinite;
+            z-index: -1;
+        }
+        
+        @keyframes metalShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.05),
+                rgba(0, 255, 0, 0.05) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            background-color: rgba(0, 20, 0, 0.8);
+            border: 1px solid #0f0;
+            border-radius: 0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            padding: 30px;
+            text-align: left;
+            max-width: 800px;
+            width: 90%;
+            margin: 20px;
+            position: relative;
+            z-index: 2;
+            /* Металлический эффект для контейнера */
+            background-image: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0) 20%,
+                rgba(255, 255, 255, 0) 80%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #0f0;
+            text-align: center;
+            text-shadow: 0 0 5px #0f0;
+            letter-spacing: 2px;
+        }
+        
+        .year {
+            font-size: 1.8rem;
+            color: rgb(103, 192, 103);
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 5px #0f0;
+        }
+        
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #0f0, transparent);
+            margin: 20px 0;
+            opacity: 0.5;
+        }
+        
+        .info {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #0f0;
+        }
+        
+        .code-block {
+            background-color: rgba(0, 30, 0, 0.5);
+            border-left: 3px solid #0f0;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Share Tech Mono', monospace;
+            white-space: pre-wrap;
+            position: relative;
+            /* Металлический эффект для блока кода */
+            background-image: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(255, 255, 255, 0) 20%,
+                rgba(255, 255, 255, 0) 80%,
+                rgba(255, 255, 255, 0.05) 100%
+            );
+        }
+        
+        .code-block::before {
+            content: '>';
+            position: absolute;
+            left: 5px;
+            top: 15px;
+            color: #0f0;
+        }
+        
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: #0f0;
+            margin-left: 5px;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+        
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #f00;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00f;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            10% { clip: rect(112px, 9999px, 76px, 0); }
+            20% { clip: rect(85px, 9999px, 77px, 0); }
+            30% { clip: rect(27px, 9999px, 97px, 0); }
+            40% { clip: rect(64px, 9999px, 98px, 0); }
+            50% { clip: rect(61px, 9999px, 85px, 0); }
+            60% { clip: rect(99px, 9999px, 114px, 0); }
+            70% { clip: rect(34px, 9999px, 115px, 0); }
+            80% { clip: rect(98px, 9999px, 129px, 0); }
+            90% { clip: rect(43px, 9999px, 96px, 0); }
+            100% { clip: rect(82px, 9999px, 64px, 0); }
+        }
+        
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 119px, 0); }
+            10% { clip: rect(79px, 9999px, 66px, 0); }
+            20% { clip: rect(101px, 9999px, 114px, 0); }
+            30% { clip: rect(105px, 9999px, 50px, 0); }
+            40% { clip: rect(38px, 9999px, 103px, 0); }
+            50% { clip: rect(83px, 9999px, 40px, 0); }
+            60% { clip: rect(40px, 9999px, 70px, 0); }
+            70% { clip: rect(108px, 9999px, 83px, 0); }
+            80% { clip: rect(114px, 9999px, 94px, 0); }
+            90% { clip: rect(104px, 9999px, 27px, 0); }
+            100% { clip: rect(26px, 9999px, 75px, 0); }
+        }
+        
+        .terminal-header {
+            background-color: rgba(0, 30, 0, 0.5);
+            padding: 5px 10px;
+            border-bottom: 1px solid rgb(143, 230, 143);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            /* Металлический эффект для заголовка */
+            background-image: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0) 50%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+        }
+        
+        .terminal-buttons span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+        
+        .terminal-buttons span:nth-child(1) { background-color: #f00; }
+        .terminal-buttons span:nth-child(2) { background-color: #ff0; }
+        .terminal-buttons span:nth-child(3) { background-color: #0f0; }
+        
+        .icon {
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+            font-weight: bold;
+        }
+        
+        .telegram {
+            color: rgb(142, 219, 142);
+            text-decoration: none;
+            border-bottom: 1px dashed #0f0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .year {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <div class="container">
+        <div class="terminal-header">
+            <div>sirius_quest_2025.exe</div>
+            <div class="terminal-buttons">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <h1 class="glitch" data-text="СИРИУС КВЕСТ">СИРИУС КВЕСТ</h1>
+        <div class="year">2025<span class="blink">_</span></div>
+        
+        <div class="divider"></div>
+        
+        <div class="info">
+            > Квест делится на две части:
+            
+            > первую можно решить исключительно за компьютером. Ответом на нее будет являться город, в котором проживает объект. Для ее решения не нужны знания сложнее информатики 6 класса. На каждом этапе вам стоит оперировать всей имеющейся информацией, а не только последней полученной. Для гарантированного прохождения стоит использовать поисковик Google. Как только вы завершите прохождение первой части, вышлете мне в личные сообщения в телеграмме ответ, и я дам вам информацию по прохождению второй части.
+            
+            > Вторая часть ориентируется на места, расположенные на территории ОЦ Сириус.
+            
+            > Можно спрашивать подсказки, если заблудились в решении.
+        </div>
+        
+        <div class="code-block">
+            <span class="icon">✉</span> баббаабаббббабббббббаббабабббаббабабаба
+            
+            <span class="icon">🔑</span> феъшюыфюпнфрайутффшрышуыоьрнщычуащацаоы
+        </div>
+        
+        <div class="info">
+            > Для сдачи кода пишите: @GoodGameIsGood 
+        </div>
+        
+        <div class="info" style="text-align: center; margin-top: 30px; text-transform: uppercase;">
+            Удачи, воин!
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            let glitchInterval = setInterval(() => {
+                if (Math.random() > 0.9) {
+                    container.style.boxShadow = '0 0 30px rgba(0, 255, 0, 0.8)';
+                    setTimeout(() => {
+                        container.style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.3)';
+                    }, 100);
+                }
+            }, 5000);
+            
+            // Эффект печатающего текста
+            const infoElements = document.querySelectorAll('.info');
+            infoElements.forEach(el => {
+                const text = el.innerHTML;
+                el.innerHTML = '';
+                let i = 0;
+                const typing = setInterval(() => {
+                    if (i < text.length) {
+                        el.innerHTML += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typing);
+                    }
+                }, 10);
+            });
+            
+            // Добавляем случайные блики на металлической поверхности
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    const shine = document.createElement('div');
+                    shine.style.position = 'fixed';
+                    shine.style.width = '100px';
+                    shine.style.height = '100px';
+                    shine.style.background = 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)';
+                    shine.style.borderRadius = '50%';
+                    shine.style.pointerEvents = 'none';
+                    shine.style.zIndex = '0';
+                    shine.style.left = Math.random() * 100 + 'vw';
+                    shine.style.top = Math.random() * 100 + 'vh';
+                    shine.style.transform = 'translate(-50%, -50%)';
+                    document.body.appendChild(shine);
+                    
+                    setTimeout(() => {
+                        shine.style.transition = 'opacity 1s ease-out';
+                        shine.style.opacity = '0';
+                        setTimeout(() => {
+                            shine.remove();
+                        }, 1000);
+                    }, 300);
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
