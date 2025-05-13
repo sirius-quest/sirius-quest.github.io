@@ -6,6 +6,7 @@
     <title>Сириус Квест - 2025</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
         * {
             margin: 0;
@@ -100,6 +101,7 @@
             text-align: center;
             text-shadow: 0 0 5px #0f0;
             letter-spacing: 1px;
+            font-family: 'Press Start 2P', cursive;
         }
         
         .year {
@@ -295,13 +297,14 @@
                 top: 10px;
             }
             
-            /* Скрываем только иконки и коды, но оставляем блок */
+            /* Скрываем только иконки, но оставляем текст */
             .icon {
                 display: none;
             }
             
+            /* Оставляем текст кода видимым */
             .code-scroll {
-                display: none;
+                display: block;
             }
         }
     </style>
