@@ -126,26 +126,25 @@
         }
         
         .code-block {
-        background-color: rgba(0, 30, 0, 0.5);
-        border-left: 3px solid #0f0;
-        padding: 12px;
-        margin: 15px 0;
-        font-family: 'Share Tech Mono', monospace;
-        white-space: pre-wrap;
-        position: relative;
-        font-size: 0.85rem;
-        background-image: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.05) 0%,
-            rgba(255, 255, 255, 0) 20%,
-            rgba(255, 255, 255, 0) 80%,
-            rgba(255, 255, 255, 0.05) 100%
-        );
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        display: flex; 
-        flex-direction: column; 
-    }
+            background-color: rgba(0, 30, 0, 0.5);
+            border-left: 3px solid #0f0;
+            padding: 12px;
+            margin: 15px 0;
+            font-family: 'Share Tech Mono', monospace;
+            white-space: pre-wrap;
+            position: relative;
+            font-size: 0.85rem;
+            background-image: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(255, 255, 255, 0) 20%,
+                rgba(255, 255, 255, 0) 80%,
+                rgba(255, 255, 255, 0.05) 100%
+            );
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
         .code-block::before {
             content: '>';
             position: absolute;
@@ -269,7 +268,6 @@
             border-bottom: 1px dashed #0f0;
         }
         
-        /* Горизонтальная прокрутка для длинных кодов */
         .code-scroll {
             display: block;
             overflow-x: auto;
@@ -277,24 +275,35 @@
             padding-bottom: 5px;
         }
         
-       @media (max-width: 768px) {
-        .info-and-codes {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            gap: 15px;
+        /* Оптимизация для мобильных */
+        @media (max-width: 480px) {
+            .glitch::before, .glitch::after {
+                animation: none;
+                display: none;
+            }
+            
+            .info {
+                font-size: 0.85rem;
+            }
+            
+            .code-block {
+                font-size: 0.8rem;
+                padding: 10px 12px 10px 20px;
+            }
+            
+            .code-block::before {
+                top: 10px;
+            }
+            
+            /* Скрываем только иконки и коды, но оставляем блок */
+            .icon {
+                display: none;
+            }
+            
+            .code-scroll {
+                display: none;
+            }
         }
-        
-        .code-block {
-            width: 200px; 
-            flex-shrink: 0;
-            margin: 0;
-        }
-        
-        .info-text {
-            flex-grow: 1;
-        }
-    }
     </style>
 </head>
 <body>
@@ -315,6 +324,15 @@
         
         <div class="divider"></div>
         
+        <div class="code-block">
+            <div class="code-scroll">
+                <span class="icon">✉</span> баббаабаббббабббббббаббабабббаббабабаба
+            </div>
+            <div class="code-scroll">
+                <span class="icon">🔑</span> феъшюыфюпнфрайутффшрышуыоьрнщычуащацаоы
+            </div>
+        </div>
+        
         <div class="info">
             Квест делится на две части:
             
@@ -323,15 +341,6 @@
             Вторая часть ориентируется на места, расположенные на территории ОЦ Сириус.
             
             Можно спрашивать подсказки, если заблудились в решении.
-        </div>
-        
-        <div class="code-block">
-            <div class="code-scroll">
-                <span class="icon">✉</span> баббаабаббббабббббббаббабабббаббабабаба
-            </div>
-            <div class="code-scroll">
-                <span class="icon">🔑</span> феъшюыфюпнфрайутффшрышуыоьрнщычуащацаоы
-            </div>
         </div>
         
         <div class="info">
